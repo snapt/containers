@@ -22,6 +22,7 @@ LABEL name="SnaptADC" \
 COPY help.md /tmp/
 
 ### add licenses to this directory
+RUN mkdir /licenses
 COPY licenses /licenses
 
 ### Add necessary Red Hat repos here
