@@ -22,7 +22,7 @@ LABEL name="SnaptADC" \
 COPY help.md /tmp/
 
 ### add licenses to this directory
-#COPY licenses /licenses
+COPY licenses /licenses
 
 ### Add necessary Red Hat repos here
 RUN rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
