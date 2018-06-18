@@ -5,7 +5,7 @@ ENV container docker
 LABEL name="SnaptADC" \
       maintainer="support@snapt.net" \
       vendor="Snapt" \
-      version="1.0.1" \
+      version="1.0.2" \
       release="1" \
       summary="Snapt Application Delivery Controller (ADC)" \
       description="The Snapt ADC ensures your website or service is always online, performing quickly and safe from threats.Snapt provides high-end virtualized and cloud-based load balancing, web acceleration and security software for your critical services." \
