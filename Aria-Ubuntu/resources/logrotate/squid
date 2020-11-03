@@ -1,0 +1,14 @@
+/var/log/squid/access.log /var/log/squid/store.log /var/log/squid/cache.log {
+    su root syslog
+    compress
+    dateext
+    maxage 365
+    rotate 99
+    notifempty
+    missingok
+    create 640 proxy proxy
+    sharedscripts
+    postrotate
+     /usr/bin/systemctl -q is-active squid.service && /usr/sbin/squid -k rotate
+    endscript
+}

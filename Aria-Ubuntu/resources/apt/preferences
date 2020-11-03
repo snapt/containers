@@ -1,0 +1,15 @@
+Package: nginx*
+Pin: release o=Ubuntu
+Pin-Priority: -1
+
+Package: keepalived*
+Pin: release o=Ubuntu
+Pin-Priority: -1
+
+Package: lighttpd*
+Pin: release o=Ubuntu
+Pin-Priority: -1
+
+Package: php5*
+Pin: release o=Ubuntu
+Pin-Priority: -1

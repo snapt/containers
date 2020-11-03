@@ -1,0 +1,13 @@
+#!/bin/bash -e
+#====================================================================================================
+# Author: tim.elston@snapt.net
+# Description: Build script for Snapt Ubuntu images
+# Date: 2018/11/14
+#====================================================================================================
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+#====================================================================================================
+# Define some variables
+image_path="./ubuntu-18*-server-amd64.iso"
+parent_path=$(cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+cd "$parent_path"
+#

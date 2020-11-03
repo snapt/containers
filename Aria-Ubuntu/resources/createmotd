@@ -1,0 +1,27 @@
+#!/bin/bash
+motd="/etc/motd"
+
+
+W="\033[01;37m"
+B="\033[01;34m"
+R="\033[01;31m"
+X="\033[00;37m"
+D="\033[0m"
+
+clear > $motd # to clear the screen when showing up
+echo -e "$R===============================================================================" >> $motd
+echo -e "       SNAPT CONSOLE ACCESS                                  " >> $motd
+echo -e "                                                             " >> $motd
+echo -e "       $R Setup Network   :$W networkConfig                  " >> $motd
+echo -e "       $R Get IP Address  :$W getipaddress                   " >> $motd
+echo -e "       $R Default Root PW :$W snapt                          " >> $motd
+echo -e "       $R Default UI Port :$W 8080                           " >> $motd
+echo -e "$R===============================================================================" >> $motd
+echo -e "       $R To start use a $W web browser $R to go to port$W 8080                  " >> $motd
+echo -e "       $R Type $W "getipaddress" $R to find the IP,                              " >> $motd
+echo -e "       $R or $W "networkConfig" $R to set it.                                    " >> $motd
+echo -e "                                                                                 " >> $motd
+echo -e "$D" >> $motd
+
+
+
