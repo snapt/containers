@@ -54,9 +54,16 @@ RUN curl \
     --connect-timeout 30 \
     --retry 100 \
     --output /snapt_fw.tar.gz \
-   https://shop.snapt.net/pluginAPI.php?task=getFramework \
-   && tar -C /srv/www/htdocs/ -xvf /snapt_fw.tar.gz \
+   https://shop.snapt.net/pluginAPI.php?task=getFramework
+RUN tar -C /srv/www/htdocs/ -xvf /snapt_fw.tar.gz \
    && rm /snapt_fw.tar.gz
+
+#Download/Extract ioncube loader files and enable
+RUN wget https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz -O /ioncube_loaders_lin_x86-64.tar.gz
+RUN tar -C / -xvf /ioncube_loaders_lin_x86-64.tar.gz \
+	&& echo "zend_extension=\"/ioncube/ioncube_loader_lin_5.6.so\"" > /etc/php/5.6/mods-available/ioncube.ini \
+	&& echo "; priority=01" >> /etc/php/5.6/mods-available/ioncube.ini \
+	&& phpenmod ioncube
 
 COPY resources/snapt_nginx_builder.sh /tmp/
 RUN chmod 777 /tmp/snapt_nginx_builder.sh
