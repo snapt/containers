@@ -100,10 +100,11 @@ COPY resources/webserver/etc/lighttpd/ /etc/lighttpd/
 COPY resources/haproxy.cfg /etc/haproxy/haproxy.cfg
 COPY resources/nginx.conf /etc/nginx/nginx.conf
 COPY resources/nginx.init.sh /etc/init.d/nginx
+COPY resources/keepalived.init.sh /etc/init.d/keepalived
 COPY resources/*.ini /srv/www/htdocs/config/
 COPY resources/wrapper /srv/www/htdocs/bin/
 COPY service-wrapper.sh /service-wrapper.sh
-RUN chmod +x /service-wrapper.sh /etc/init.d/nginx
+RUN chmod +x /service-wrapper.sh /etc/init.d/nginx /etc/init.d/keepalived
 
 RUN mkdir -p /data/accel/cache \
 	&& chmod -R 777 /data/accel/cache

@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+  snapt-adc:
+    image: snapt-aria:latest
+    hostname: snapt
+    stdin_open: true
+    labels:
+      component: snapt
+    build: .
+    network_mode: "host"
+    expose:
+      - "8080/tcp"
+      - "8081/tcp"
+      - "80/tcp"
+      - "443/tcp"
+    volumes:
+      - nginx_log:/var/log/nginx
+      - snapt:/usr/local/snapt
+      - nginx:/etc/nginx
+      - snapt_var:/var/snapt
+      - haproxy:/etc/haproxy
+      - accelcache:/data/accel/cache
+    restart: unless-stopped
+
+volumes:
+    nginx_log:
+    snapt:
+    nginx:
+    snapt_var:
+    haproxy:
+    accelcache:
