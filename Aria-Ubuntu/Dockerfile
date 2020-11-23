@@ -89,6 +89,9 @@ RUN addgroup lighttpd \
 RUN addgroup www \
 && adduser --system --no-create-home --disabled-login --ingroup www www
 
+#symlink for chmod (UI uses /usr/bin/chmod someitmes)
+RUN ln -s /bin/chmod /usr/bin/chmod
+
 COPY resources/apt/ /etc/apt/
 COPY resources/logrotate/ /etc/logrotate.d/
 COPY resources/php/ /etc/php/5.6/
@@ -96,10 +99,11 @@ COPY resources/webserver/etc/lighttpd/ /etc/lighttpd/
 #COPY resources/nginx.service /etc/
 COPY resources/haproxy.cfg /etc/haproxy/haproxy.cfg
 COPY resources/nginx.conf /etc/nginx/nginx.conf
+COPY resources/nginx.init.sh /etc/init.d/nginx
 COPY resources/*.ini /srv/www/htdocs/config/
 COPY resources/wrapper /srv/www/htdocs/bin/
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY service-wrapper.sh /service-wrapper.sh
+RUN chmod +x /service-wrapper.sh /etc/init.d/nginx
 
 RUN mkdir -p /data/accel/cache \
 	&& chmod -R 777 /data/accel/cache
@@ -111,9 +115,11 @@ RUN chown -R root:lighttpd /srv/www/htdocs/ \
 #Create persistent volumes
 VOLUME ["/usr/local/snapt", "/etc/haproxy", "/etc/nginx", "/var/snapt"]
 
+EXPOSE 80
+EXPOSE 443
 EXPOSE 8080
 EXPOSE 29987
 
-ENTRYPOINT /entrypoint.sh
+#ENTRYPOINT /entrypoint.sh
 
-#CMD /bin/bash
+CMD /service-wrapper.sh
