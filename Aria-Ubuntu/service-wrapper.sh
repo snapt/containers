@@ -2,12 +2,12 @@
 
 balancer_started=false
 accelerator_started=false
-redundancy_started=true
+redundancy_started=false
 
 /usr/sbin/haproxy -c -f /etc/haproxy/haproxy.cfg
 status=$?
 
-if [ $status -eq 0 ] 
+if [ $status -eq 0 ]; then
   /etc/init.d/haproxy start
   /etc/init.d/haproxy status
 
@@ -26,7 +26,7 @@ fi
 /usr/sbin/nginx -t -c /etc/nginx/nginx.conf
 status=$?
 
-if [ $status -eq 0 ] 
+if [ $status -eq 0 ]; then
   /etc/init.d/nginx start
   /etc/init.d/nginx status
 
@@ -46,7 +46,7 @@ fi
 status=$?
 
 
-if [ $status -eq 0 ] 
+if [ $status -eq 0 ]; then
   /etc/init.d/keepalived start
   /etc/init.d/keepalived status
 

@@ -22,6 +22,10 @@ services:
       - haproxy:/etc/haproxy
       - accelcache:/data/accel/cache
     restart: unless-stopped
+    ulimits:
+      nofile:
+        soft: 999999
+        hard: 999999
 
 volumes:
     nginx_log:

@@ -113,6 +113,14 @@ RUN chown -R root:lighttpd /srv/www/htdocs/ \
 	&& chown root:www-data /srv/www/htdocs/bin/wrapper \
 	&& chmod 4755 /srv/www/htdocs/bin/wrapper
 
+#remove systemd from image so UI does not check for it (generates lots of logs)
+RUN apt-get remove -y systemd
+
+RUN apt-get clean \
+	&& apt-get autoremove --yes \
+	&& rm -rf /var/lib/apt/lists/*
+
+
 #Create persistent volumes
 VOLUME ["/usr/local/snapt", "/etc/haproxy", "/etc/nginx", "/var/snapt"]
 
